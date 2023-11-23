@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cifra_cesa"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        tools:layout_editor_absoluteX="1dp">
+
+        <EditText
+            android:id="@+id/editOriginal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mouse_memoirs"
+            android:lineSpacingExtra="15sp"
+            android:text="Texto original"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:translationX="20dp"
+            android:translationY="470dp"
+            android:typeface="serif"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editChave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mouse_memoirs"
+            android:lineSpacingExtra="15sp"
+            android:text="Chave"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationX="340dp"
+            android:translationY="390dp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/textCifrado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mouse_memoirs"
+            android:lineSpacingExtra="15sp"
+            android:text="Texto Cifrado"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
+            android:textSize="29sp"
+            android:textStyle="bold"
+            android:translationX="23dp"
+            android:translationY="430dp"
+            android:typeface="serif" />
+
+        <ImageButton
+            android:id="@+id/cifrar"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="238dp"
+            android:layout_height="199dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#000000"
+            android:cropToPadding="true"
+            android:onClick="Cesar"
+            android:padding="200dp"
+            android:rotationX="194"
+            android:scaleType="centerCrop"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+
+            android:translationX="85dp"
+            android:translationY="440dp"
+            app:srcCompat="@drawable/lockk" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
