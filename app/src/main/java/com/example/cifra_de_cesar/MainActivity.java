@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         textCifrado = findViewById(R.id.textCifrado);
         editChave = findViewById(R.id.editChave);
 
+
         final EditText editChave = findViewById(R.id.editChave);
         final EditText editOriginal = findViewById(R.id.editOriginal);
 
@@ -49,13 +50,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Cesar(View view) {
-        String msg = editOriginal.getText().toString();
+        String msg = editOriginal.getText().toString().toLowerCase();
         int chave = Integer.parseInt(editChave.getText().toString());
         String alfa = "abcdefghijklmnopqrstuvwxyz";
         String alfaChave = alfa.substring(chave, 26);
+        String alfaCifrado = alfaChave + alfa.substring(0, chave);
+
         String[] alfaOri = new String[26];
         String[] alfaCesar = new String[26];
-        String alfaCifrado = alfaChave + alfa.substring(0, chave);
 
         int x = 0;
         for (String l : alfa.split("")) {
@@ -76,8 +78,13 @@ public class MainActivity extends AppCompatActivity {
                 msgCifra += " ";
             } else {
                 int index = Arrays.asList(alfaOri).indexOf(letra);
-                String letraCifra = alfaCesar[index];
-                msgCifra += letraCifra;
+                if (index == -1){
+                    msgCifra += letra;
+                }
+                else {
+                    String letraCifra = alfaCesar[index];
+                    msgCifra += letraCifra;
+                }
             }
         }
         textCifrado.setText(msgCifra);

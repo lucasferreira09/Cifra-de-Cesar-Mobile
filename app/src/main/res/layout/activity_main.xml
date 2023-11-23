@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textAviso"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cifra_cesa"
@@ -40,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mouse_memoirs"
+            android:inputType="number"
             android:lineSpacingExtra="15sp"
             android:text="Chave"
             android:textAllCaps="false"
@@ -89,4 +91,5 @@
 
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
