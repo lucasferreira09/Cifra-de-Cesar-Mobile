@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         textCifrado = findViewById(R.id.textCifrado);
         editChave = findViewById(R.id.editChave);
 
-
         final EditText editChave = findViewById(R.id.editChave);
         final EditText editOriginal = findViewById(R.id.editOriginal);
 
