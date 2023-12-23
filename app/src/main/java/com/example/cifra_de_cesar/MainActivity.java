@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
 
-    private EditText editOriginal;
+    private EditText textOriginal;
     private TextView textCifrado;
     private EditText editChave;
 
@@ -23,33 +24,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editOriginal = findViewById(R.id.editOriginal);
+        textOriginal = findViewById(R.id.textOriginal);
         textCifrado = findViewById(R.id.textCifrado);
         editChave = findViewById(R.id.editChave);
 
         final EditText editChave = findViewById(R.id.editChave);
-        final EditText editOriginal = findViewById(R.id.editOriginal);
+        final EditText textOriginal = findViewById(R.id.textOriginal);
 
-        editChave.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                editChave.setText("");
-            }
-
-        });
-        editOriginal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                editOriginal.setText("");
-            }
-        });
 
 
     }
 
     public void Cesar(View view) {
-        String msg = editOriginal.getText().toString().toLowerCase();
+        Toast toast = new Toast(this);
+        toast.setText("TEXTO/CHAVE\nNÃO INSERIDO");
+
+        String msg = textOriginal.getText().toString().toLowerCase();
+        if (msg.equals("")) {
+            toast.show();
+            return;
+        }
+        if (editChave.getText().toString().equals("")) {
+            toast.show();
+            return;
+        }
         int chave = Integer.parseInt(editChave.getText().toString());
         String alfa = "abcdefghijklmnopqrstuvwxyz";
         String alfaChave = alfa.substring(chave, 26);

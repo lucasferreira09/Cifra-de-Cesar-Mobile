@@ -5,91 +5,113 @@
     android:id="@+id/textAviso"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cifra_cesa"
+    android:background="@drawable/cifraback"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/image_cifra"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/cifra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editChave"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/mouse_memoirs"
+        app:layout_constraintTop_toBottomOf="@id/image_cifra"
+        app:layout_constraintRight_toRightOf="parent"
+        android:inputType="number"
+        android:lineSpacingExtra="15sp"
+        android:text=""
+        android:hint="@string/edit_chave"
+        android:textColorHint="@color/white"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintTop_toBottomOf="@id/image_cifra"
+        tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/editOriginal"
+            android:id="@+id/textOriginal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mouse_memoirs"
-            android:lineSpacingExtra="15sp"
-            android:text="Texto original"
+            android:text=""
+            android:hint="@string/text_Original"
+            android:textColorHint="@color/white"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:translationX="20dp"
-            android:translationY="470dp"
             android:typeface="serif"
-            android:visibility="visible" />
-
-        <EditText
-            android:id="@+id/editChave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/mouse_memoirs"
-            android:inputType="number"
-            android:lineSpacingExtra="15sp"
-            android:text="Chave"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:translationX="340dp"
-            android:translationY="390dp"
-            android:typeface="serif" />
+            android:visibility="visible"
+            android:layout_marginStart="20dp"/>
 
         <TextView
             android:id="@+id/textCifrado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/mouse_memoirs"
-            android:lineSpacingExtra="15sp"
             android:text="Texto Cifrado"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF"
             android:textSize="29sp"
             android:textStyle="bold"
-            android:translationX="23dp"
-            android:translationY="430dp"
-            android:typeface="serif" />
-
-        <ImageButton
-            android:id="@+id/cifrar"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="238dp"
-            android:layout_height="199dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:backgroundTint="#000000"
-            android:cropToPadding="true"
-            android:onClick="Cesar"
-            android:padding="200dp"
-            android:rotationX="194"
-            android:scaleType="centerCrop"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-
-            android:translationX="85dp"
-            android:translationY="440dp"
-            app:srcCompat="@drawable/lockk" />
-
+            android:typeface="serif"
+            android:layout_marginStart="24dp"/>
 
     </LinearLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+
+    <ImageButton
+        android:id="@+id/cifrar"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="238dp"
+        android:layout_height="199dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#000000"
+        android:cropToPadding="true"
+        android:onClick="Cesar"
+        android:padding="200dp"
+        android:rotationX="194"
+        android:scaleType="centerCrop"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/lockk"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="cifrar">
+
+    </ImageButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
