@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         int chave = Integer.parseInt(editChave.getText().toString());
+        if (chave > 26) {
+            Toast.makeText(this, "CHAVE INVÁLIDA!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String alfa = "abcdefghijklmnopqrstuvwxyz";
         String alfaChave = alfa.substring(chave, 26);
         String alfaCifrado = alfaChave + alfa.substring(0, chave);
