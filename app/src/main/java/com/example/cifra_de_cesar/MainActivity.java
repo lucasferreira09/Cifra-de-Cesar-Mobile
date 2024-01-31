@@ -1,10 +1,13 @@
 package com.example.cifra_de_cesar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private EditText textOriginal;
-    private TextView textCifrado;
     private EditText editChave;
+    private ImageButton cifrar;
 
 
     @Override
@@ -25,33 +28,49 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textOriginal = findViewById(R.id.textOriginal);
-        textCifrado = findViewById(R.id.textCifrado);
         editChave = findViewById(R.id.editChave);
+
+        cifrar = findViewById(R.id.cifrar);
 
         final EditText editChave = findViewById(R.id.editChave);
         final EditText textOriginal = findViewById(R.id.textOriginal);
 
+        cifrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View infla = LayoutInflater.from(MainActivity.this).inflate(R.layout.text_cifrado, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(infla);
+                AlertDialog dialog = builder.create();
+
+                TextView textResult = infla.findViewById(R.id.textResult);
+
+                if (Cesar() != null){
+                    textResult.setText(Cesar());
+                    dialog.show();
+                }
+            }
+        });
 
 
     }
 
-    public void Cesar(View view) {
-        Toast toast = new Toast(this);
-        toast.setText("TEXTO/CHAVE\nNÃO INSERIDO");
+    public String Cesar() {
 
         String msg = textOriginal.getText().toString().toLowerCase();
         if (msg.equals("")) {
-            toast.show();
-            return;
+            Toast.makeText(this, "TEXTO NÃO INSERIDO", Toast.LENGTH_SHORT).show();
+            return null;
         }
         if (editChave.getText().toString().equals("")) {
-            toast.show();
-            return;
+            Toast.makeText(this, "CHAVE NÃO INSERIDA", Toast.LENGTH_SHORT).show();
+            return null;
         }
         int chave = Integer.parseInt(editChave.getText().toString());
         if (chave > 26) {
             Toast.makeText(this, "CHAVE INVÁLIDA!", Toast.LENGTH_SHORT).show();
-            return;
+            return null;
         }
         String alfa = "abcdefghijklmnopqrstuvwxyz";
         String alfaChave = alfa.substring(chave, 26);
@@ -88,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        textCifrado.setText(msgCifra);
 
+        return msgCifra;
     }
 
 }
