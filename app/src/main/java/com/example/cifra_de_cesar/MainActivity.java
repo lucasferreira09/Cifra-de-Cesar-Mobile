@@ -1,114 +1,116 @@
 package com.example.cifra_de_cesar;
 
+import static android.service.autofill.Validators.or;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private EditText textOriginal;
     private EditText editChave;
     private ImageButton cifrar;
+    private Button insiraMsgOriginal;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        editChave = findViewById(R.id.editChave);
+        cifrar = findViewById(R.id.cifrar);
+        insiraMsgOriginal = findViewById(R.id.insiraMsgOriginal);
 
-        textOriginal = findViewById(R.id.textOriginal);
         editChave = findViewById(R.id.editChave);
 
-        cifrar = findViewById(R.id.cifrar);
 
-        final EditText editChave = findViewById(R.id.editChave);
-        final EditText textOriginal = findViewById(R.id.textOriginal);
+        //Cria o AlertDialog para inserir a mensagem a ser cifrada
+        View cifrando = LayoutInflater.from(MainActivity.this).inflate(R.layout.cifre_aqui, null);
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this, R.style.CustomDialogTheme);
+        builder2.setView(cifrando);
 
-        cifrar.setOnClickListener(new View.OnClickListener() {
+        EditText msgPraCifrar = cifrando.findViewById(R.id.msgPraCifrar);
+
+        builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog2 = builder2.create();
+
+        //Botão para inserir a mensagem a ser cifrada
+        insiraMsgOriginal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View infla = LayoutInflater.from(MainActivity.this).inflate(R.layout.text_cifrado, null);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setView(infla);
-                AlertDialog dialog = builder.create();
-
-                TextView textResult = infla.findViewById(R.id.textResult);
-
-                if (Cesar() != null){
-                    textResult.setText(Cesar());
-                    dialog.show();
-                }
+                dialog2.show();
             }
         });
 
 
-    }
 
-    public String Cesar() {
 
-        String msg = textOriginal.getText().toString().toLowerCase();
-        if (msg.equals("")) {
-            Toast.makeText(this, "TEXTO NÃO INSERIDO", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        if (editChave.getText().toString().equals("")) {
-            Toast.makeText(this, "CHAVE NÃO INSERIDA", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        int chave = Integer.parseInt(editChave.getText().toString());
-        if (chave > 26) {
-            Toast.makeText(this, "CHAVE INVÁLIDA!", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        String alfa = "abcdefghijklmnopqrstuvwxyz";
-        String alfaChave = alfa.substring(chave, 26);
-        String alfaCifrado = alfaChave + alfa.substring(0, chave);
 
-        String[] alfaOri = new String[26];
-        String[] alfaCesar = new String[26];
+        //Ao ser acionado, irá cifrar a mensagem
+        //e abrir uma caixa de diálogo com a mensagem Cifrada
+        cifrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        int x = 0;
-        for (String l : alfa.split("")) {
-            alfaOri[x] = l;
-            x++;
-        }
-
-        int n = 0;
-        for (String a : alfaCifrado.split("")) {
-            alfaCesar[n] = a;
-            n++;
-        }
-
-        String msgCifra = "";
-
-        for (String letra : msg.split("")) {
-            if (letra.equals(" ")) {
-                msgCifra += " ";
-            } else {
-                int index = Arrays.asList(alfaOri).indexOf(letra);
-                if (index == -1){
-                    msgCifra += letra;
+                //Verifica se foi inserido alguma Chave
+                int chave = 0;
+                String chaveText = editChave.getText().toString();
+                if (!TextUtils.isEmpty(chaveText)) {
+                    chave = Integer.parseInt(chaveText);
                 }
-                else {
-                    String letraCifra = alfaCesar[index];
-                    msgCifra += letraCifra;
+
+                String msgOriginal = msgPraCifrar.getText().toString();
+
+                if (verificaExisteMensagem(msgOriginal, chave) == true) {
+
+                    Cifrador cifrador = new Cifrador();
+                    cifrador.criaAlfabeto(chave);
+
+                    //Cria o AlertDialog para exibir a mensagem cifrada
+                    View infla = LayoutInflater.from(MainActivity.this).inflate(R.layout.text_cifrado, null);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setView(infla);
+                    AlertDialog dialog = builder.create();
+
+                    //Adiciona a mensagem Cifrada no TextView
+                    TextView textMensagemCifrada = infla.findViewById(R.id.textResult);
+                    textMensagemCifrada.setText(cifrador.cifrarMensagem(msgOriginal));
+                    dialog.show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Dados Inválidos", Toast.LENGTH_SHORT).show();
                 }
+
             }
-        }
+        });
 
-        return msgCifra;
+    }
+    public boolean verificaExisteMensagem(String mensagem, int chave) {
+
+        if (!mensagem.equals("") && chave <= 24 && chave >= 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

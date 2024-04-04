@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Cifra de César</string>
     <string name="text_Original">"Texto Original"</string>
-    <string name="edit_chave">"Chave"</string>
+    <string name="edit_chave">"Chave: 1-26"</string>
 </resources>
