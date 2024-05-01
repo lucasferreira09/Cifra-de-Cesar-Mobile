@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         //Ao ser acionado, irá cifrar a mensagem
         //e abrir uma caixa de diálogo com a mensagem Cifrada
         binding.cifrar.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String msgOriginal = msgPraCifrar.getText().toString();
 
-                if (verificaExisteMensagem(msgOriginal, chave) == true) {
-
+                if (verificaExisteMensagem(msgOriginal, chave)) {
                     Cifrador cifrador = new Cifrador();
                     cifrador.criaAlfabeto(chave);
 
@@ -102,17 +99,12 @@ public class MainActivity extends AppCompatActivity {
                     textMensagemCifrada.setText(cifrador.cifrarMensagem(msgOriginal));
                     dialog.show();
 
-                    //Botão copia Texto Cifrado
+                    //Botão copiar Mensagem Cifrada
                     ImageButton buttonCopy = infla.findViewById(R.id.buttonCopy);
                     buttonCopy.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ClipboardManager clipboardManager = (ClipboardManager)
-                                    getSystemService(Context.CLIPBOARD_SERVICE);
-
-                            ClipData clipData = ClipData.newPlainText("texto_cifrado", textMensagemCifrada.getText().toString());
-                            clipboardManager.setPrimaryClip(clipData);
-                            Toast.makeText(MainActivity.this, "Copiado", Toast.LENGTH_SHORT).show();
+                            copiarMsgAreaTransferencia(textMensagemCifrada.getText().toString());
                         }
                     });
 
@@ -130,5 +122,16 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    //CopyToClipBoard
+    public void copiarMsgAreaTransferencia(String msgCifrada) {
+
+        ClipboardManager clipboardManager = (ClipboardManager)
+                getSystemService(Context.CLIPBOARD_SERVICE);
+
+        ClipData clipData = ClipData.newPlainText("texto_cifrado", msgCifrada);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(MainActivity.this, "Copiado", Toast.LENGTH_SHORT).show();
     }
 }

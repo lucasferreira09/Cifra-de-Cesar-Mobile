@@ -1,6 +1,7 @@
 package com.example.cifra_de_cesar;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Cifrador {
     private String[] alfabetoOriginal;
@@ -8,28 +9,27 @@ public class Cifrador {
 
     public void criaAlfabeto(int chave) {
 
-        String alfa = "abcdefghijklmnopqrstuvwxyz";
-        String alfaChave = alfa.substring(chave, 26);
-        String alfaCifrado = alfaChave + alfa.substring(0, chave);
+        String alfabeto = "abcdefghijklmnopqrstuvwxyz";
+        String parteCifrada = alfabeto.substring(chave, 26);
+        String alfabetoCifra = parteCifrada + alfabeto.substring(0, chave);
 
-        String[] alfaOri = new String[26];
-        String[] alfaCifr = new String[26];
+        String[] alfaOriginal = new String[26];
+        String[] alfaCifrado = new String[26];
 
         int x = 0;
-        for (String l : alfa.split("")) {
-            alfaOri[x] = l;
+        for (String l : alfabeto.split("")) {
+            alfaOriginal[x] = l;   //Prenche o alfaOriginal
             x++;
         }
 
         int n = 0;
-        for (String a : alfaCifrado.split("")) {
-            alfaCifr[n] = a;
+        for (String a : alfabetoCifra.split("")) {
+            alfaCifrado[n] = a;   //Prenche o alfaCifrado
             n++;
         }
 
-        alfabetoOriginal = alfaOri;
-        alfabetoCifrado = alfaCifr;
-
+        alfabetoOriginal = alfaOriginal;
+        alfabetoCifrado = alfaCifrado;
     }
 
     public String cifrarMensagem(String mensagem) {
@@ -54,7 +54,6 @@ public class Cifrador {
                 }
             }
         }
-
         return mensagemCifrada;
     }
 }
