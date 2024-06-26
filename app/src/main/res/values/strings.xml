@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Cifra de César</string>
+    <string name="app_name">Cifrador-Msg</string>
     <string name="text_Original">"Texto Original"</string>
-    <string name="edit_chave">"Chave: 1-26"</string>
+    <string name="edit_chave">"Chave"</string>
 
     <string name="inserir_msg">"  Insira a mensagem"</string>
     <string name="botao_msg">"Mensagen"</string>
